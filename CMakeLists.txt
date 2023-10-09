@@ -18,3 +18,6 @@ add_library(CUTExcepts STATIC   "${CMAKE_SOURCE_DIR}/src/excepts/nullptrexcept.c
 # Test applications
 add_executable(TestExceptions "${CMAKE_SOURCE_DIR}/src/tests/excepts.cpp")
 target_link_libraries(TestExceptions CUTExcepts)
+
+add_executable(TestAlloc "${CMAKE_SOURCE_DIR}/src/tests/allocation.cpp")
+target_link_libraries(TestAlloc CUTExcepts)
