@@ -43,12 +43,10 @@ int main(int argc, const char* const argv[])
 
     std::cout << "Timer \'first\' is paused." << std::endl;
 
-    std::cout << "Second busy() call with a different timer... ";
-    cut::Timer::AttachTimer("second");
+    std::cout << "Second busy() call with a different timer, not initialized... ";
+    cut::Timer::AttachTimer("second", false);
     busy();
-    std::cout << "Time on time \'second\' is " << cut::Timer::GetTimer("second").GetTime() << std::endl;
-    cut::Timer::GetTimer("second").Reset(false);
-    std::cout << "After resetting \'second\', its time is " << cut::Timer::GetTimer("second").GetTime() << std::endl;
+    std::cout << "Time on timer \'second\' is " << cut::Timer::GetTimer("second").GetTime() << std::endl;
 
     cut::Timer::GetTimer("first").Start();
     busy();

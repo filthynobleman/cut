@@ -16,6 +16,9 @@ add_library(CUTTime STATIC  "${CMAKE_SOURCE_DIR}/src/time/timestamp.cpp"
                             "${CMAKE_SOURCE_DIR}/src/time/timer.cpp")
 target_link_libraries(CUTTime CUTExcepts)
 
+# Logging library
+add_library(CUTLog STATIC "${CMAKE_SOURCE_DIR}/src/log/log.cpp")
+target_link_libraries(CUTLog CUTExcepts CUTTime)
 
 
 
@@ -29,3 +32,6 @@ target_link_libraries(TestAlloc CUTExcepts)
 
 add_executable(TestTime "${CMAKE_SOURCE_DIR}/src/tests/time.cpp")
 target_link_libraries(TestTime CUTTime)
+
+add_executable(TestLog "${CMAKE_SOURCE_DIR}/src/tests/log.cpp")
+target_link_libraries(TestLog CUTLog)

@@ -30,11 +30,49 @@ namespace cut
  */
 enum LogType
 {
+    /**
+     * @brief       Simple messages.
+     * 
+     * @details     Simple messages, useful to output statuses, updates, or generic informations.
+     */
     MESSAGE     = 1,
+
+    /**
+     * @brief       Warning messages.
+     * 
+     * @details     Warning messages, useful to notify something is not working as expected, but
+     *              it's not harmful.
+     */
     WARNING     = 2,
+
+    /**
+     * @brief       Error messages.
+     * 
+     * @details     Error messages, useful to notify that there is something wrong and that the
+     *              program should be terminated, or at least rolled back to a safe status.
+     */
     ERROR       = 4,
+
+    /**
+     * @brief       Every type of message.
+     * 
+     * @details     Identifies all the types of messages.
+     */
     ALL         = 7,
+
+    /**
+     * @brief       Only important messages.
+     * 
+     * @details     Identifies only the types of messages that are considered important,
+     *              excluding simple messages. Useful to reduce the verbosity of a logger.
+     */
     IMPORTANT   = 6,
+
+    /**
+     * @brief       No messages.
+     * 
+     * @details     Identifies no types of message. Useful to disable a logger temporarily.
+     */
     NONE        = 0
 };
     
@@ -149,22 +187,116 @@ public:
 
 
 
+    /**
+     * @brief       Return the mask for filtering the log types.
+     * 
+     * @details     Return the mask for filtering the log types.
+     * 
+     * @return cut::LogType The filter mask.
+     */
     cut::LogType GetMask() const;
+
+    /**
+     * @brief       Set the mask for filtering the log types.
+     * 
+     * @details     Set the mask for filtering the log types.
+     * 
+     * @param Mask The filter mask.
+     */
     void SetMask(cut::LogType Mask);
 
+    /**
+     * @brief       Enables the given types.
+     * 
+     * @details     This method updates the log mask to enable logging of the
+     *              given types, without enabling or disabling other types.
+     * 
+     * @param Types The log types to enable.
+     */
+    void Enable(cut::LogType Types);
+
+    /**
+     * @brief       Disable the given types.
+     * 
+     * @details     This method updates the log mask to disable logging of the
+     *              given types, without enabling or disabling other types.
+     * 
+     * @param Types The log types to disable.
+     */
+    void Disable(cut::LogType Types);
+
+    /**
+     * @brief       Enable logging of simple messages.
+     * 
+     * @details     Enable logging of simple messages.
+     */
     void EnableMessages();
+    /**
+     * @brief       Enable logging of warnings.
+     * 
+     * @details     Enable logging of warnings.
+     */
     void EnableWarnings();
+    /**
+     * @brief       Enable logging of errors.
+     * 
+     * @details     Enable logging of errors.
+     */
     void EnableErrors();
+
+    /**
+     * @brief       Disable logging of simple messages.
+     * 
+     * @details     Disable logging of simple messages.
+     */
     void DisableMessages();
+    /**
+     * @brief       Disable logging of warnings.
+     * 
+     * @details     Disable logging of warnings.
+     */
     void DisableWarnings();
+    /**
+     * @brief       Disable logging of errors.
+     * 
+     * @details     Disable logging of errors.
+     */
     void DisableErrors();
 
 
 
-
+    /**
+     * @brief       Determine whether or not timestamps are logged.
+     * 
+     * @details     This method tells if this logger also outputs timestamps attached
+     *              to the messages.
+     * 
+     * @return true If timestamps are used.
+     * @return false If timestamps are not used.
+     */
     bool HasTimestamps() const;
+
+    /**
+     * @brief       Decide whether or not to use timestamps.
+     * 
+     * @details     This method sets this logger to also output timestamps attached
+     *              to the messages.
+     * 
+     * @param Timestamps Whether or not to use timestamps.
+     */
     void UseTimestamps(bool Timestamps);
+
+    /**
+     * @brief       Enable the use of timestamps.
+     * 
+     * @details     Enable the use of timestamps.
+     */
     void EnableTimestamps();
+    /**
+     * @brief       Disable the use of timestamps.
+     * 
+     * @details     Disable the use of timestamps.
+     */
     void DisableTimestamps();
 
 
