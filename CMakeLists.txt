@@ -11,6 +11,11 @@ add_library(CUTExcepts STATIC   "${CMAKE_SOURCE_DIR}/src/excepts/nullptrexcept.c
                                 "${CMAKE_SOURCE_DIR}/src/excepts/assertexcept.cpp"
                                 "${CMAKE_SOURCE_DIR}/src/excepts/boundsexcept.cpp")
 
+# Time library
+add_library(CUTTime STATIC  "${CMAKE_SOURCE_DIR}/src/time/timestamp.cpp"
+                            "${CMAKE_SOURCE_DIR}/src/time/timer.cpp")
+target_link_libraries(CUTTime CUTExcepts)
+
 
 
 
@@ -21,3 +26,6 @@ target_link_libraries(TestExceptions CUTExcepts)
 
 add_executable(TestAlloc "${CMAKE_SOURCE_DIR}/src/tests/allocation.cpp")
 target_link_libraries(TestAlloc CUTExcepts)
+
+add_executable(TestTime "${CMAKE_SOURCE_DIR}/src/tests/time.cpp")
+target_link_libraries(TestTime CUTTime)

@@ -14,6 +14,9 @@
 
 
 
+std::unordered_map<std::string, cut::Timer> cut::Timer::m_Timers;
+
+
 cut::Timer::Timer(bool StartNow)
 {
     Reset(StartNow);
@@ -63,10 +66,13 @@ bool cut::Timer::IsPaused() const { return m_IsPause; }
 
 double cut::Timer::GetTime() const
 {
-    std::chrono::system_clock::time_point End;
-    End = std::chrono::system_clock::now();
-    std::chrono::system_clock::duration ET = End - m_Start;
-    ET += m_Tot;
+    std::chrono::system_clock::duration ET = m_Tot;
+    if (!IsPaused())
+    {
+        std::chrono::system_clock::time_point End;
+        End = std::chrono::system_clock::now();
+        ET += End - m_Start;;
+    }
     size_t ETns = std::chrono::duration_cast<std::chrono::nanoseconds>(ET).count();
     return 1.0e-9 * ETns;
 }
@@ -78,10 +84,13 @@ size_t cut::Timer::GetTime(cut::TimerPrecision Precision) const
               (Precision == cut::TimerPrecision::MICROSECONDS) || 
               (Precision == cut::TimerPrecision::NANOSECONDS));
 
-    std::chrono::system_clock::time_point End;
-    End = std::chrono::system_clock::now();
-    std::chrono::system_clock::duration ET = End - m_Start;
-    ET += m_Tot;
+    std::chrono::system_clock::duration ET = m_Tot;
+    if (!IsPaused())
+    {
+        std::chrono::system_clock::time_point End;
+        End = std::chrono::system_clock::now();
+        ET += End - m_Start;;
+    }
     size_t ETcast;
     switch (Precision)
     {
@@ -106,9 +115,12 @@ size_t cut::Timer::GetTime(cut::TimerPrecision Precision) const
 
 double cut::Timer::GetCPUTime() const
 {
-    clock_t CPUEnd = clock();
-    clock_t ET = CPUEnd - m_CPUStart;
-    ET += m_CPUTot;
+    clock_t ET = m_CPUTot;
+    if (!IsPaused())
+    {
+        clock_t CPUEnd = clock();
+        ET += CPUEnd - m_CPUStart;
+    }
     return ET / ((double)CLOCKS_PER_SEC);
 }
 
