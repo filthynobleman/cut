@@ -20,6 +20,10 @@ target_link_libraries(CUTTime CUTExcepts)
 add_library(CUTLog STATIC "${CMAKE_SOURCE_DIR}/src/log/log.cpp")
 target_link_libraries(CUTLog CUTExcepts CUTTime)
 
+# Algorithms & data structures library
+add_library(CUTAlgo STATIC "${CMAKE_SOURCE_DIR}/src/algo/minheap.cpp")
+target_link_libraries(CUTAlgo CUTExcepts)
+
 
 
 
@@ -35,3 +39,6 @@ target_link_libraries(TestTime CUTTime)
 
 add_executable(TestLog "${CMAKE_SOURCE_DIR}/src/tests/log.cpp")
 target_link_libraries(TestLog CUTLog)
+
+add_executable(TestAlgo "${CMAKE_SOURCE_DIR}/src/tests/algo.cpp")
+target_link_libraries(TestAlgo CUTAlgo)
