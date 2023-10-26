@@ -115,6 +115,24 @@ void cut::MinHeap::IncreaseKey(size_t Element, double Increment)
         MoveUp(Element);
 }
 
+void cut::MinHeap::SetKey(size_t Element, double NewKey)
+{
+    CUTCheckLess(Element, Size());
+
+    NewKey *= m_Sign;
+    size_t v = m_Perm[Element];
+    if (NewKey > m_Nodes[v].first)
+    {
+        m_Nodes[v].first = NewKey;
+        MoveDown(Element);
+    }
+    else
+    {
+        m_Nodes[v].first = NewKey;
+        MoveUp(Element);
+    }
+}
+
 
 void cut::MinHeap::Insert(double Key)
 {

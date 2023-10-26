@@ -171,6 +171,18 @@ public:
      */
     void IncreaseKey(size_t Element,
                      double Increment);
+
+    /**
+     * @brief       Set the key of the element to a given value.
+     * 
+     * @details     This method updates the key associated to the given element
+     *              with the given value, and then restores the heap.
+     * 
+     * @param Element The element whose key must be modified.
+     * @param NewKey The new value of the key.
+     */
+    void SetKey(size_t Element,
+                double NewKey);
 };
 
 } // namespace cut
