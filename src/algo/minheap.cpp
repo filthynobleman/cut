@@ -11,6 +11,8 @@
  */
 #include <cut/algo/minheap.hpp>
 #include <cut/excepts/excepts.hpp>
+#include <cmath>
+#include <iostream>
 
 std::pair<double, size_t> cut::MinHeap::FindMin() const
 {
@@ -27,7 +29,7 @@ void cut::MinHeap::MoveUp(size_t Element)
     size_t v = m_Perm[Element];
     while (v != 0)
     {
-        size_t p = v >> 1;  // parent is floor(v / 2)
+        size_t p = (v - 1) >> 1;  // parent is floor(v / 2)
         // if parent is already smaller, it's done
         if (m_Nodes[p].first < m_Nodes[v].first)
             break;
@@ -48,15 +50,15 @@ void cut::MinHeap::MoveDown(size_t Element)
     size_t v = m_Perm[Element];
     while (true)
     {
-        size_t u = 2 * v;
+        size_t u = (v << 1) + 1; // left child is 2 * v
         // If no children, break
         if (u >= Size())
             break;
         // If two children, pick minimum key
-        if (u + 1 < Size())
+        if (u < Size() - 1)
         {
             if (m_Nodes[u].first > m_Nodes[u + 1].first)
-                u = u + 1;
+                u++;
         }
 
         // If children has a larger key, break
@@ -121,16 +123,19 @@ void cut::MinHeap::SetKey(size_t Element, double NewKey)
 
     NewKey *= m_Sign;
     size_t v = m_Perm[Element];
+    // If the operation increases the key, move down
     if (NewKey > m_Nodes[v].first)
     {
         m_Nodes[v].first = NewKey;
         MoveDown(Element);
     }
-    else
+    // If the operation decreases the key, move up
+    else if (NewKey < m_Nodes[v].first)
     {
         m_Nodes[v].first = NewKey;
         MoveUp(Element);
     }
+    // If key is unchanged, there is no need to modify the heap
 }
 
 
