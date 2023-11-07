@@ -1,4 +1,6 @@
-![CMake multi-platform](https://github.com/filthynobleman/cut/actions/workflows/cmake-multi-platform.yml/badge.svg)
+![CMake Windows](https://github.com/filthynobleman/rematching/actions/workflows/cmake-windows.yml/badge.svg)
+![CMake Ubuntu](https://github.com/filthynobleman/rematching/actions/workflows/cmake-ubuntu.yml/badge.svg)
+![CMake Mac OS](https://github.com/filthynobleman/rematching/actions/workflows/cmake-macos.yml/badge.svg)
 
 # CUT: a C++ Utility Toolkit
 *CUT* is a C++ library designed to provide a set of general purpose tools to ease the producetion of codebases and cut depelopment time (pun intended).  
