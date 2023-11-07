@@ -1,3 +1,5 @@
+![CMake multi-platform](https://github.com/filthynobleman/cut/actions/workflows/cmake-multi-platform.yml/badge.svg)
+
 # CUT: a C++ Utility Toolkit
 *CUT* is a C++ library designed to provide a set of general purpose tools to ease the producetion of codebases and cut depelopment time (pun intended).  
 While I'm developing the library to conduct research projects under Windows environment, I'm trying to do my best for keeping it general and making it cross-platform.
