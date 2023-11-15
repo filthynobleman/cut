@@ -22,6 +22,8 @@ cut::CompatAdjacencyList::CompatAdjacencyList(const std::vector<std::pair<int,in
     int NConns = Connections.size();
     std::pair<int, int>* Conns = cut::AllocCopy(Connections.data(), NConns);
     std::sort(Conns, Conns + NConns);
+    std::pair<int, int>* CEnd = std::unique(Conns, Conns + NConns);
+    NConns = CEnd - Conns;
     int NNodes = Conns[NConns - 1].first + 1;
 
     // Initialize the data
@@ -81,7 +83,7 @@ cut::CompatAdjacencyList::CompatAdjacencyList(cut::CompatAdjacencyList&& AL)
     m_Idx = std::move(AL.m_Idx);
 }
 
-cut::CompatAdjacencyList& cut::CompatAdjacencyList::operator=(const cut::BaseAdjacencyList& AL)
+cut::BaseAdjacencyList& cut::CompatAdjacencyList::operator=(const cut::BaseAdjacencyList& AL)
 {
     cut::BaseAdjacencyList::operator=(AL);
     

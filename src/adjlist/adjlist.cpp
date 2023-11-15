@@ -45,7 +45,14 @@ cut::AdjacencyList::AdjacencyList(const std::vector<std::pair<int,int>>& Connect
     for (int i = 0; i < NNodes; ++i)
         m_Adj[i].reserve(NConns[i]);
     for (const std::pair<int, int>& c : Connections)
-        m_Adj[c.first].push_back(c.second);
+    {
+        try
+        {
+            AddAdjacent(c.first, c.second);
+        }
+        catch(const std::exception& e) { }
+        
+    }
 }
 
 cut::AdjacencyList::AdjacencyList(const cut::BaseAdjacencyList& AL)
@@ -88,7 +95,7 @@ cut::AdjacencyList::AdjacencyList(cut::AdjacencyList&& AL)
     m_NConnections = AL.m_NConnections;
 }
 
-cut::AdjacencyList& cut::AdjacencyList::operator=(const cut::BaseAdjacencyList& AL)
+cut::BaseAdjacencyList& cut::AdjacencyList::operator=(const cut::BaseAdjacencyList& AL)
 {
     cut::BaseAdjacencyList::operator=(AL);
     // If same class, it's easy

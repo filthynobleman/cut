@@ -40,6 +40,11 @@ namespace cut
 class BaseAdjacencyList
 {
 public:
+    /**
+     * @brief       Base constructor.
+     * 
+     * @details     This constructor initializes an empty adjacency list.
+     */
     BaseAdjacencyList();
 
     /**
@@ -147,7 +152,7 @@ public:
  */
 class AdjacencyList : public cut::BaseAdjacencyList
 {
-private:
+protected:
     /**
      * @brief       The list of lists implementing the adjacency list.
      * @details     The list of lists implementing the adjacency list.
@@ -205,7 +210,7 @@ public:
      */
     AdjacencyList(cut::AdjacencyList&& AL);
 
-    virtual cut::AdjacencyList& operator=(const cut::BaseAdjacencyList& AL) override;
+    virtual cut::BaseAdjacencyList& operator=(const cut::BaseAdjacencyList& AL) override;
 
     /**
      * @brief       Assignment-move operator.
@@ -230,7 +235,7 @@ public:
      * @details     This method adds a new node to the list, and assigns to
      *              it the index <code>NumNodes()</code>.
      */
-    void AddNode();
+    virtual void AddNode();
 
     /**
      * @brief       Insert a new node in the given position.
@@ -244,7 +249,7 @@ public:
      * 
      * @param i The index where to insert the new node.
      */
-    void InsertNode(int i);
+    virtual void InsertNode(int i);
 
     /**
      * @brief       Swaps the connection lists of the given nodes.
@@ -259,7 +264,7 @@ public:
      * @param i The index of a node.
      * @param j The index of a node.
      */
-    void SwapNodes(int i, int j);
+    virtual void SwapNodes(int i, int j);
 
     /**
      * @brief       Removes the given node.
@@ -273,7 +278,7 @@ public:
      *              
      * @param i The node to remove.
      */
-    void RemoveNode(int i);
+    virtual void RemoveNode(int i);
 
     /**
      * @brief       Add the given adjancent to the given node.
@@ -287,7 +292,7 @@ public:
      * @param i The index of a node.
      * @param j The new adjacent.
      */
-    void AddAdjacent(int i, int j);
+    virtual void AddAdjacent(int i, int j);
 
     /**
      * @brief       Add the given adjancent to the given node.
@@ -306,7 +311,7 @@ public:
      * @param j The new adjacent.
      * @param idx The index of the connection.
      */
-    void InsertAdjacent(int i, int j, int idx);
+    virtual void InsertAdjacent(int i, int j, int idx);
 
     /**
      * @brief       Updates the adjancent to the given value.
@@ -322,7 +327,7 @@ public:
      * @param j The new value of the adjacent.
      * @param idx The index of the connection.
      */
-    void UpdateAdjacent(int i, int j, int idx);
+    virtual void UpdateAdjacent(int i, int j, int idx);
 
     /**
      * @brief       Replace the given adjacent with a new one.
@@ -339,7 +344,7 @@ public:
      * @param j The value of the adjacent to replace.
      * @param k The new value of the replaced adjacent.
      */
-    void ReplaceAdjacent(int i, int j, int k);
+    virtual void ReplaceAdjacent(int i, int j, int k);
 
     /**
      * @brief       Removes the given adjacent to the given node.
@@ -353,7 +358,7 @@ public:
      * @param i The index of a node.
      * @param idx The index of a connection.
      */
-    void RemoveAdjacent(int i, int idx);
+    virtual void RemoveAdjacent(int i, int idx);
 };
 
 
@@ -368,7 +373,7 @@ public:
  */
 class CompatAdjacencyList : public cut::BaseAdjacencyList
 {
-private:
+protected:
     /**
      * @brief       The list of connections.
      * @details     The list of connections.
@@ -416,7 +421,7 @@ public:
      */
     CompatAdjacencyList(cut::CompatAdjacencyList&& AL);
 
-    virtual cut::CompatAdjacencyList& operator=(const cut::BaseAdjacencyList& AL) override;
+    virtual cut::BaseAdjacencyList& operator=(const cut::BaseAdjacencyList& AL) override;
 
     /**
      * @brief       Assignment-move operator.
