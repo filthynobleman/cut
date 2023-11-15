@@ -10,25 +10,6 @@ enable_language(CXX)
 # Include project headers
 include_directories("${CMAKE_SOURCE_DIR}/include")
 
-# Header files
-set(CUT_HPP "${CMAKE_SOURCE_DIR}/include/cut/cut.hpp"
-            "${CMAKE_SOURCE_DIR}/include/cut/log.hpp"
-            "${CMAKE_SOURCE_DIR}/include/cut/common/common.hpp"
-            "${CMAKE_SOURCE_DIR}/include/cut/common/macros.hpp"
-            "${CMAKE_SOURCE_DIR}/include/cut/common/namesp.hpp"
-            "${CMAKE_SOURCE_DIR}/include/cut/memory/memory.hpp"
-            "${CMAKE_SOURCE_DIR}/include/cut/memory/allocation.hpp"
-            "${CMAKE_SOURCE_DIR}/include/cut/excepts/excepts.hpp"
-            "${CMAKE_SOURCE_DIR}/include/cut/excepts/assertexcept.hpp"
-            "${CMAKE_SOURCE_DIR}/include/cut/excepts/nullptrexcept.hpp"
-            "${CMAKE_SOURCE_DIR}/include/cut/excepts/boundsexcept.hpp"
-            "${CMAKE_SOURCE_DIR}/include/cut/time/time.hpp"
-            "${CMAKE_SOURCE_DIR}/include/cut/time/timer.hpp"
-            "${CMAKE_SOURCE_DIR}/include/cut/time/timestamp.hpp"
-            "${CMAKE_SOURCE_DIR}/include/cut/algo/algo.hpp"
-            "${CMAKE_SOURCE_DIR}/include/cut/algo/minheap.hpp"
-)
-
 # Implementation files
 set(CUT_CPP "${CMAKE_SOURCE_DIR}/src/excepts/assertexcept.cpp"
             "${CMAKE_SOURCE_DIR}/src/excepts/nullptrexcept.cpp"
@@ -37,6 +18,9 @@ set(CUT_CPP "${CMAKE_SOURCE_DIR}/src/excepts/assertexcept.cpp"
             "${CMAKE_SOURCE_DIR}/src/time/timer.cpp"
             "${CMAKE_SOURCE_DIR}/src/log/log.cpp"
             "${CMAKE_SOURCE_DIR}/src/algo/minheap.cpp"
+            "${CMAKE_SOURCE_DIR}/src/adjlist.badjlist.cpp"
+            "${CMAKE_SOURCE_DIR}/src/adjlist.adjlist.cpp"
+            "${CMAKE_SOURCE_DIR}/src/adjlist.cadjlist.cpp"
 )
 
 

@@ -37,7 +37,7 @@ T* Calloc(size_t numel, size_t elsize = sizeof(T))
 }
 
 template<typename T>
-T* Memcpy(T* dst, T* src, size_t numel, size_t elsize = sizeof(T))
+T* Memcpy(T* dst, const T* src, size_t numel, size_t elsize = sizeof(T))
 {
     dst = (T*)std::memcpy(dst, src, numel * elsize);
     CUTCheckNull(dst);
@@ -45,7 +45,7 @@ T* Memcpy(T* dst, T* src, size_t numel, size_t elsize = sizeof(T))
 }
 
 template<typename T>
-T* AllocCopy(T* src, size_t numel, size_t elsize = sizeof(T))
+T* AllocCopy(const T* src, size_t numel, size_t elsize = sizeof(T))
 {
     T* res = cut::Malloc<T>(numel, elsize);
     return cut::Memcpy(res, src, numel, elsize);

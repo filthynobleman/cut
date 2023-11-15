@@ -13,3 +13,4 @@
 #pragma once
 
 #include <cut/algo/minheap.hpp>
+#include <cut/algo/adjlist.hpp>
