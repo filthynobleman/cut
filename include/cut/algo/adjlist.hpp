@@ -58,6 +58,17 @@ public:
     BaseAdjacencyList(const cut::BaseAdjacencyList& AL);
 
     /**
+     * @brief       Move constructor.
+     * 
+     * @details     This constructor initializes an adjacency list by moving
+     *              the memory from the given reference.\n 
+     *              This constructor invalidates the input.
+     * 
+     * @param AL The list to move.
+     */
+    BaseAdjacencyList(cut::BaseAdjacencyList&& AL);
+
+    /**
      * @brief       Assignment-copy operator.
      * 
      * @details     This operator updates this adjacency list to make
@@ -67,6 +78,18 @@ public:
      * @return cut::BaseAdjacencyList& This list after the assignment.
      */
     virtual cut::BaseAdjacencyList& operator=(const cut::BaseAdjacencyList& AL) = 0;
+
+    /**
+     * @brief       Assignment-move operator.
+     * 
+     * @details     This operator updates this adjacency list by moving 
+     *              the memory from the given reference.\n 
+     *              This opeator invalidates the input.
+     * 
+     * @param AL The list to move.
+     * @return cut::BaseAdjacencyList& This list after the assignment.
+     */
+    virtual cut::BaseAdjacencyList& operator=(cut::BaseAdjacencyList&& AL) = 0;
 
     /**
      * @brief       Destroy the BaseAdjacencyList object.
@@ -208,20 +231,10 @@ public:
      * 
      * @param AL The adjacency list to move.
      */
-    AdjacencyList(cut::AdjacencyList&& AL);
+    AdjacencyList(cut::BaseAdjacencyList&& AL);
 
     virtual cut::BaseAdjacencyList& operator=(const cut::BaseAdjacencyList& AL) override;
-
-    /**
-     * @brief       Assignment-move operator.
-     * 
-     * @details     This operator updates this adjacency list by moving
-     *              the memory from the given adjacency list.\n 
-     *              This operator invalidates the input.
-     * 
-     * @param AL The adjacency list to move.
-     */
-    virtual cut::AdjacencyList& operator=(cut::AdjacencyList&& AL);
+    virtual cut::AdjacencyList& operator=(cut::BaseAdjacencyList&& AL) override;
     virtual ~AdjacencyList();
 
     virtual int NumNodes() const override;
@@ -419,20 +432,10 @@ public:
      * 
      * @param AL The adjacency list to move.
      */
-    CompatAdjacencyList(cut::CompatAdjacencyList&& AL);
+    CompatAdjacencyList(cut::BaseAdjacencyList&& AL);
 
     virtual cut::BaseAdjacencyList& operator=(const cut::BaseAdjacencyList& AL) override;
-
-    /**
-     * @brief       Assignment-move operator.
-     * 
-     * @details     This operator updates this adjacency list by moving
-     *              the memory from the given adjacency list.\n 
-     *              This operator invalidates the input.
-     * 
-     * @param AL The adjacency list to move.
-     */
-    virtual cut::CompatAdjacencyList& operator=(cut::CompatAdjacencyList&& AL);
+    virtual cut::CompatAdjacencyList& operator=(cut::BaseAdjacencyList&& AL) override;
     virtual ~CompatAdjacencyList();
 
     virtual int NumNodes() const override;

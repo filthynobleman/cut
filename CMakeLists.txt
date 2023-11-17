@@ -18,9 +18,9 @@ set(CUT_CPP "${CMAKE_SOURCE_DIR}/src/excepts/assertexcept.cpp"
             "${CMAKE_SOURCE_DIR}/src/time/timer.cpp"
             "${CMAKE_SOURCE_DIR}/src/log/log.cpp"
             "${CMAKE_SOURCE_DIR}/src/algo/minheap.cpp"
-            "${CMAKE_SOURCE_DIR}/src/adjlist.badjlist.cpp"
-            "${CMAKE_SOURCE_DIR}/src/adjlist.adjlist.cpp"
-            "${CMAKE_SOURCE_DIR}/src/adjlist.cadjlist.cpp"
+            "${CMAKE_SOURCE_DIR}/src/algo/adjlist/badjlist.cpp"
+            "${CMAKE_SOURCE_DIR}/src/algo/adjlist/adjlist.cpp"
+            "${CMAKE_SOURCE_DIR}/src/algo/adjlist/cadjlist.cpp"
 )
 
 
@@ -58,7 +58,10 @@ if (BUILD_SAMPLES)
     add_executable(TestLog "${CMAKE_SOURCE_DIR}/src/tests/log.cpp")
     target_link_libraries(TestLog cut)
 
-    add_executable(TestAlgo "${CMAKE_SOURCE_DIR}/src/tests/algo.cpp")
-    target_link_libraries(TestAlgo cut)
+    add_executable(TestMinheap "${CMAKE_SOURCE_DIR}/src/tests/minheap.cpp")
+    target_link_libraries(TestMinheap cut)
+
+    add_executable(TestAdjlist "${CMAKE_SOURCE_DIR}/src/tests/adjlist.cpp")
+    target_link_libraries(TestAdjlist cut)
 
 endif()

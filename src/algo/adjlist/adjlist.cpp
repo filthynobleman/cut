@@ -88,11 +88,19 @@ cut::AdjacencyList::AdjacencyList(const cut::BaseAdjacencyList& AL)
     }
 }
 
-cut::AdjacencyList::AdjacencyList(cut::AdjacencyList&& AL)
+cut::AdjacencyList::AdjacencyList(cut::BaseAdjacencyList&& AL)
     : cut::BaseAdjacencyList()
 {
-    m_Adj = std::move(AL.m_Adj);
-    m_NConnections = AL.m_NConnections;
+    try
+    {
+        cut::AdjacencyList&& FAL = dynamic_cast<cut::AdjacencyList&&>(AL);
+        m_Adj = std::move(FAL.m_Adj);
+        m_NConnections = FAL.m_NConnections;
+    }
+    catch(const std::exception& e)
+    {
+        throw e;
+    }   
 }
 
 cut::BaseAdjacencyList& cut::AdjacencyList::operator=(const cut::BaseAdjacencyList& AL)
@@ -117,7 +125,7 @@ cut::BaseAdjacencyList& cut::AdjacencyList::operator=(const cut::BaseAdjacencyLi
     int NNodes = AL.NumNodes();
     m_Adj.resize(NNodes);
     if (NNodes == 0)
-        return;
+        return *this;
     // Fill adjacency list
     for (int i = 0; i < NNodes; ++i)
     {
@@ -130,10 +138,18 @@ cut::BaseAdjacencyList& cut::AdjacencyList::operator=(const cut::BaseAdjacencyLi
     return *this;
 }
 
-cut::AdjacencyList& cut::AdjacencyList::operator=(cut::AdjacencyList&& AL)
+cut::AdjacencyList& cut::AdjacencyList::operator=(cut::BaseAdjacencyList&& AL)
 {
-    m_NConnections = AL.m_NConnections;
-    m_Adj = std::move(AL.m_Adj);
+    try
+    {
+        cut::AdjacencyList&& FAL = dynamic_cast<cut::AdjacencyList&&>(AL);
+        m_Adj = std::move(FAL.m_Adj);
+        m_NConnections = FAL.m_NConnections;
+    }
+    catch(const std::exception& e)
+    {
+        throw e;
+    }
     return *this;
 }
 
@@ -217,8 +233,12 @@ void cut::AdjacencyList::UpdateAdjacent(int i, int j, int idx)
     CUTCheckLess(i, NumNodes());
     CUTCheckGEQ(idx, 0);
     CUTCheckLess(idx, NumAdjacents(i));
-    CUTAssert(std::find(m_Adj[i].begin(), m_Adj[i].end(), j) == m_Adj[i].end());
 
+    // Ignore if the update does not change the value
+    if (m_Adj[i][idx] == j)
+        return;
+
+    CUTAssert(std::find(m_Adj[i].begin(), m_Adj[i].end(), j) == m_Adj[i].end());
     m_Adj[i][idx] = j;
 }
 

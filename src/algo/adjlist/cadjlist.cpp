@@ -76,11 +76,19 @@ cut::CompatAdjacencyList::CompatAdjacencyList(const cut::BaseAdjacencyList& AL)
     }
 }
 
-cut::CompatAdjacencyList::CompatAdjacencyList(cut::CompatAdjacencyList&& AL)
+cut::CompatAdjacencyList::CompatAdjacencyList(cut::BaseAdjacencyList&& AL)
     : cut::BaseAdjacencyList()
 {
-    m_Adj = std::move(AL.m_Adj);
-    m_Idx = std::move(AL.m_Idx);
+    try
+    {
+        cut::CompatAdjacencyList&& CAL = dynamic_cast<cut::CompatAdjacencyList&&>(AL);
+        m_Adj = std::move(CAL.m_Adj);
+        m_Idx = std::move(CAL.m_Idx);
+    }
+    catch(const std::exception& e)
+    {
+        throw e;
+    }
 }
 
 cut::BaseAdjacencyList& cut::CompatAdjacencyList::operator=(const cut::BaseAdjacencyList& AL)
@@ -116,10 +124,18 @@ cut::BaseAdjacencyList& cut::CompatAdjacencyList::operator=(const cut::BaseAdjac
     return *this;
 }
 
-cut::CompatAdjacencyList& cut::CompatAdjacencyList::operator=(cut::CompatAdjacencyList&& AL)
+cut::CompatAdjacencyList& cut::CompatAdjacencyList::operator=(cut::BaseAdjacencyList&& AL)
 {
-    m_Adj = std::move(AL.m_Adj);
-    m_Idx = std::move(AL.m_Idx);
+    try
+    {
+        cut::CompatAdjacencyList&& CAL = dynamic_cast<cut::CompatAdjacencyList&&>(AL);
+        m_Adj = std::move(CAL.m_Adj);
+        m_Idx = std::move(CAL.m_Idx);
+    }
+    catch(const std::exception& e)
+    {
+        throw e;
+    }
     return *this;
 }
 

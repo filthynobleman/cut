@@ -15,6 +15,7 @@
 #pragma once
 
 #include <cstdlib>
+#include <cstring>
 #include <cut/excepts/excepts.hpp>
 
 namespace cut
