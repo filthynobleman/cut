@@ -78,6 +78,24 @@ private:
 
 public:
     /**
+     * @brief       Create a new cut::MinHeap from the vector of keys.
+     * 
+     * @details     This constructor creates a new cut::MinHeap from the
+     *              given vector of keys.\n 
+     *              The key \code Keys[i] \endcode from the provided vector of keys
+     *              is associated to the integer value \code i \endcode before
+     *              the heapifying of the structure.\n 
+     *              If the optional parameter \code AsMaxHeap \endcode is set to
+     *              true (default is false), the cut::MinHeap is modified to
+     *              implement a max-heap data structure.
+     * 
+     * @param Keys The vector of keys to initialize the heap.
+     * @param AsMaxHeap Decide whether or not the heap must implement a min- or max- heap.
+     */
+    MinHeap(const std::vector<double>& Keys,
+            bool AsMaxHeap = false);
+
+    /**
      * @brief       Create a new cut::MinHeap from the array of keys.
      * 
      * @details     This constructor creates a new cut::MinHeap from the
@@ -90,9 +108,11 @@ public:
      *              implement a max-heap data structure.
      * 
      * @param Keys The array of keys to initialize the heap.
+     * @param NumKeys The number of keys in the array.
      * @param AsMaxHeap Decide whether or not the heap must implement a min- or max- heap.
      */
-    MinHeap(const std::vector<double>& Keys,
+    MinHeap(const double* const Keys,
+            size_t NumKeys,
             bool AsMaxHeap = false);
 
     /**

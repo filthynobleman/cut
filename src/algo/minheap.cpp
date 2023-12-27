@@ -161,4 +161,21 @@ cut::MinHeap::MinHeap(const std::vector<double>& Keys,
         Insert(k);
 }
 
+cut::MinHeap::MinHeap(const double* const Keys,
+                      size_t NumKeys,
+                      bool IsMaxHeap)
+{
+    CUTCheckNull(Keys);
+
+    // Min-heap store keys with the right sign.
+    // Max-heap store keys with negated sign.
+    m_Sign = 1;
+    if (IsMaxHeap)
+        m_Sign = -1;
+    
+    // Add one by one and update the heap
+    for (size_t i = 0; i < NumKeys; ++i)
+        Insert(Keys[i]);
+}
+
 cut::MinHeap::~MinHeap() { }
